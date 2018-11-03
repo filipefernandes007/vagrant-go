@@ -1,0 +1,15 @@
+public_network : "192.168.33.185"
+hostname : "go-vagrant-web-dev"
+hostsupdater : false
+dependencies:
+  go : true
+  mysql : true
+  sqlite : true
+  java-8 : false
+  mongodb : false
+  nginx: false
+  nodejs : false
+  redis : false
+  elasticsearch : false
+database: "dev"
+

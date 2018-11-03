@@ -1,0 +1,89 @@
+package main
+
+import (
+	"github.com/EngineerKamesh/gofullstack/volume3/section4/gopherface/common/utility"
+	"github.com/jinzhu/gorm"
+
+	"../datastore"
+
+	//_ "github.com/jinzhu/gorm/dialects/sqlite"
+	"../model"
+	_ "github.com/go-sql-driver/mysql"
+	"gopkg.in/gormigrate.v1"
+	"log"
+)
+
+func getId() string {
+	return utility.GenerateUUID()
+}
+
+func main() {
+	//db, err := gorm.Open("mysql", "root:root@tcp(127.0.0.1:3306)/dev?parseTime=true")
+	db, err := datastore.DB(datastore.MYSQL)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer db.Close()
+
+	db.LogMode(true)
+
+	m := gormigrate.New(db, gormigrate.DefaultOptions, []*gormigrate.Migration{
+		// create persons table
+		{
+			ID: getId(),
+			Migrate: func(tx *gorm.DB) error {
+				// it's a good pratice to copy the struct inside the function,
+				// so side effects are prevented if the original struct changes during the time
+				type Person struct {
+					model.Base
+					FirstName string
+					LastName string
+
+				}
+				return tx.AutoMigrate(&Person{}).Error
+			},
+			Rollback: func(tx *gorm.DB) error {
+				return tx.DropTable("people").Error
+			},
+		},
+		// add age column to persons
+		{
+			ID: getId(),
+			Migrate: func(tx *gorm.DB) error {
+				// when table already exists, it just adds fields as columns
+				type Person struct {
+					Age uint
+					City string
+					Description string
+				}
+				return tx.AutoMigrate(&Person{}).Error
+			},
+			Rollback: func(tx *gorm.DB) error {
+				return tx.Table("people").DropColumn("age").Error
+			},
+		},
+		// add pets table
+		{
+			ID: getId(),
+			Migrate: func(tx *gorm.DB) error {
+				type Pet struct {
+					gorm.Model
+					Name     string
+					PersonID int
+				}
+				return tx.AutoMigrate(&Pet{}).Error
+			},
+			Rollback: func(tx *gorm.DB) error {
+				return tx.DropTable("pets").Error
+			},
+		},
+	})
+
+	if err = m.Migrate(); err != nil {
+		log.Fatalf("Could not migrate: %v", err)
+	}
+
+	log.Printf("Migration did run successfully")
+}
