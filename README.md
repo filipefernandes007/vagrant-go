@@ -74,6 +74,12 @@ go run main.go
 And then click here:
 [http://192.168.33.185:8085/people/](http://192.168.33.185:8085/people/)
 
-For mysql you can use this credentials : *root:root*
+For _**mysql**_ access you can use this credentials : *root:root*
+
+For _**mysql**_ access client via ssh :
+
+* SSH Host : 192.168.33.185
+* SSH User : vagrant
+* SSH Password : vagrant
 
 Enjoy!

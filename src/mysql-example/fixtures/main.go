@@ -24,8 +24,8 @@ func main() {
 	db.AutoMigrate(&model.Person{})
 
 	p0 := model.NewPerson("Filipe","Fernandes", "Fundão", "", 46)
-	p1 := model.Person{FirstName: "Jane", LastName: "Smith"}
-	p2 := model.NewPerson("John","Doe", "NY", "", 51)
+	p1 := model.Person{FirstName: "Rute", LastName: "Pereira"}
+	p2 := model.NewPerson("José","Xavier", "Fundão", "", 73)
 	db.Create(&p0)
 	db.Create(&p1)
 	db.Create(&p2)
