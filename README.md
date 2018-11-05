@@ -54,11 +54,23 @@ depending on _gorm_, and _[gin](https://github.com/gin-gonic/gin)_ for routing.
 They are just examples, and are not ready for production.
 
 If you want to play with them, first run migrations 
-or fixtures: 
+or then fixtures: 
 
 ``` 
-go run src/<example>/fixtures/main.go 
+cd src/<example>
 ```
+
+```
+go run migrations/main.go
+go run fixtures/main.go 
+```
+
+Verify the results
+
+```
+go run main.go
+```
+[http://192.168.33.185:8085/people/](http://192.168.33.185:8085/people/)
 
 For mysql you can use this credentials : *root:root*
 
