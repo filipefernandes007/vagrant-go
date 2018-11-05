@@ -65,7 +65,7 @@ go run migrations/main.go
 go run fixtures/main.go 
 ```
 
-Verify the results
+Verify the results:
 
 ```
 go run main.go
