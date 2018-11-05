@@ -70,6 +70,8 @@ Verify the results:
 ```
 go run main.go
 ```
+
+And then click here:
 [http://192.168.33.185:8085/people/](http://192.168.33.185:8085/people/)
 
 For mysql you can use this credentials : *root:root*
