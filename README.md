@@ -2,7 +2,7 @@
 
 ### We will install :
 
-* [Golang](https://golang.org) latest stable
+* [Golang](https://golang.org) 1.11.x
 * [Nginx](https://nginx.org/en/) (maybe for reverse proxy...)
 * [Mysql](https://dev.mysql.com/downloads/mysql/5.7.html) 5.7
 * [Sqlite3](https://sqlite.org/index.html)
@@ -11,19 +11,25 @@
 * Java 8
 * [Redis](https://redis.io) latest stable
 * [Nodejs](https://nodejs.org) latest
+* [Git](https://git-scm.com)
 * Go examples with [gorm](http://gorm.io)
 * [Glide](https://glide.readthedocs.io/en/latest) to manage Go dependencies
 
 ### Install
 
 ```
-git clone 
+git clone https://github.com/filipefernandes007/vagrant-go.git
 cd vagrant-go
 vagrant up
 ```
 
-### Access your vagrant machine and apps folder:
+### Apps folder
 
+Your applications live in `` /home/vagrant/src ``
+
+### Access your virtual machine and apps folder
+
+Your projects/apps must be under **/home/vagrant/src** folder.
 ```
 vagrant ssh
 cd src
@@ -31,13 +37,9 @@ cd src
 
 ### Choose what to install
 
-In config/config.yml you can decide what to be installed 
+At **config/config.yml** you can decide what to be installed 
 in your virtual machine. Choose _true_ for the dependencies you like to
 be installed.
-
-### Apps folder
-
-Your applications live in `` /home/vagrant/src ``
 
 ### GO environment variables
 
@@ -54,7 +56,7 @@ depending on _gorm_, and _[gin](https://github.com/gin-gonic/gin)_ for routing.
 They are just examples, and are not ready for production.
 
 If you want to play with them, first run migrations 
-or then fixtures: 
+and then fixtures: 
 
 ``` 
 cd src/<example>
@@ -71,8 +73,10 @@ Verify the results:
 go run main.go
 ```
 
-And then click here:
+and then click here:
 [http://192.168.33.185:8085/people/](http://192.168.33.185:8085/people/)
+
+### MYSQL Credentials and Client Access via SSH
 
 For _**mysql**_ access you can use this credentials : *root:root*
 
