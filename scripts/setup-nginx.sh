@@ -3,7 +3,7 @@
 apt-get -y update
 apt-get -o Dpkg::Progress-Fancy="1" -q -y install nginx
 
-mkdir -p /home/src/app/logs
+mkdir -p /home/vagrant/src/app/logs
 
 if [[ ! -e /home/vagrant/src/app/logs/nginx-access.log ]]; then
     touch /home/vagrant/src/app/logs/nginx-access.log
