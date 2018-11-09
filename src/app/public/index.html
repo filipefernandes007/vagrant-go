@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Powerd by Nginx</title>
+
+    <style>
+        body {
+          background-color: black;
+          background-image: radial-gradient(
+            rgba(0, 150, 0, 0.75), black 120%
+          );
+          height: 100vh;
+          margin: 0;
+          overflow: hidden;
+          padding: 2rem;
+          color: white;
+          font: 1.3rem Inconsolata, monospace;
+          text-shadow: 0 0 5px #C8C8C8;
+        }
+        body::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: repeating-linear-gradient(
+              0deg,
+              rgba(black, 0.15),
+              rgba(black, 0.15) 1px,
+              transparent 1px,
+              transparent 2px
+            );
+            pointer-events: none;
+          }
+        
+        body::selection {
+          background: #0080FF;
+          text-shadow: none;
+        }
+        pre {
+          margin: 0;
+        }
+        
+        pre.bash {
+         background-color: black;
+         color: grey;
+         font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+        }
+
+        .text { 
+         position: relative;
+         display: inline-block;
+         font-family: Monaco, Arial, Helvetica, sans-serif;
+         line-height: 24px;
+         font-size: 24px;
+         color: white;
+        }
+        
+        .text::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: -15px;
+          /* Remove display: inline-block if not required to be on the same line as text etc */
+          display: inline-block;
+          background-color: white;
+          vertical-align: top;
+          width: 10px;
+          /* Set height to the line height of .text */
+          height: 24px;
+          /* 
+          Animation paramaters:
+          blink = animation-name, 
+          1s = animation-duration, 
+          step-end = animation-timing-function,
+          infinite = animation-iteration-count
+          */
+          -webkit-animation: blink 1s step-end infinite;
+          animation: blink 1s step-end infinite;
+        }
+        
+        @-webkit-keyframes blink {
+          0% { opacity: 1.0; }
+          50% { opacity: 0.0; }
+          100% { opacity: 1.0; }
+        }
+        
+        @keyframes blink {
+          0% { opacity: 1.0; }
+          50% { opacity: 0.0; }
+          100% { opacity: 1.0; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Config file at /etc/nginx/sites-available/default</h1>
+    <pre class="bash">
+
+    upstream app_dev {
+        server 127.0.0.1:6666;
+    }
+    
+    server {
+        listen 80;
+        server_name _; 
+        root /home/vagrant/src/app/public;
+    
+        access_log /home/vagrant/src/app/logs/nginx-access.log;
+        error_log  /home/vagrant/src/app/logs/nginx-error.log error;
+    
+        charset utf-8;
+    
+        location / {
+            try_files \$uri \$uri/ @app;
+        }
+    
+        location @app {
+          proxy_set_header x-real-ip \$remote_addr;
+          proxy_set_header x-forwarded-for \$proxy_add_x_forwarded_for;
+          proxy_set_header host \$http_host;
+          proxy_set_header x-nginx-proxy true;
+    
+          proxy_pass http://app_dev;
+          proxy_redirect off;
+        }
+    }
+
+</pre>
+    <p class="text">Change as you wish.</p>
+</body>
+
+</html>

@@ -7,7 +7,7 @@ dependencies:
   sqlite : true
   java-8 : false
   mongodb : false
-  nginx: false
+  nginx: true
   nodejs : true
   redis : false
   elasticsearch : false

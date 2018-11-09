@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-apt-get -o Dpkg::Progress-Fancy="1" install -q -y nginx
+apt-get -y update
+apt-get -o Dpkg::Progress-Fancy="1" -q -y install nginx
 
 cat << EOF > /etc/nginx/sites-available/default 
 upstream app_dev {
@@ -10,10 +11,10 @@ upstream app_dev {
 server {
     listen 80;
     server_name _; 
-    root /home/vagrant/app/public;
+    root /home/vagrant/src/app/public;
 
-    access_log /home/vagrant/app/logs/nginx-access.log;
-    error_log  /home/vagrant/app/logs/nginx-error.log error;
+    access_log /home/vagrant/src/app/logs/nginx-access.log;
+    error_log  /home/vagrant/src/app/logs/nginx-error.log error;
 
     charset utf-8;
 
