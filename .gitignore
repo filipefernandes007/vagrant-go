@@ -5,5 +5,8 @@
 /src/*
 !/src/mysql-example
 !/src/sqlite-example
-!/src/app
+!/src/app/public/index.html    
+!/src/app/logs
+/src/app/logs/nginx-access.log
+/src/app/logs/nginx-error.log
 !/src/setup
