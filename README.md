@@ -10,7 +10,7 @@
 * [Elasticsearch](https://www.elastic.co/products/elasticsearch) 6.4.2
 * Java 8
 * [Redis](https://redis.io) latest stable
-* [Nodejs](https://nodejs.org) latest
+* [Nodejs](https://nodejs.org) 10.x
 * [Git](https://git-scm.com)
 * Go examples with [gorm](http://gorm.io)
 * [Glide](https://glide.readthedocs.io/en/latest) to manage Go dependencies

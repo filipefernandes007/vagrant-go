@@ -2,5 +2,6 @@
 /.idea
 /pkg/*
 /bin/*
-/src/github.com/
-/src/gopkg.in
+/src/*
+!/src/mysql-example
+!/src/sqlite-example

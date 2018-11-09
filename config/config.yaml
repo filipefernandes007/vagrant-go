@@ -8,7 +8,7 @@ dependencies:
   java-8 : false
   mongodb : false
   nginx: false
-  nodejs : false
+  nodejs : true
   redis : false
   elasticsearch : false
 database: "dev"

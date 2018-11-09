@@ -12,5 +12,6 @@ go get -u gopkg.in/gormigrate.v1
 go get -u gopkg.in/yaml.v2
 go get -u github.com/joho/godotenv
 go get -u github.com/caarlos0/env
+go get -u -v github.com/derekparker/delve/cmd/dlv
 
 echo "Go packages Installed"

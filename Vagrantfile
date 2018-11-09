@@ -96,6 +96,8 @@ Vagrant.configure(2) do |config|
         config.vm.network :forwarded_port, guest: 3306, host: 8033 # Mariadb
     end
 
+    config.vm.network :forwarded_port, guest: 2345, host: 2345, id: "debuggolang", host_ip: "localhost", auto_correct: true
+
     # config.vm.provision :shell, inline: "curl https://glide.sh/get | sh"
 
     config.vm.provision :shell, inline: <<-SCRIPT
